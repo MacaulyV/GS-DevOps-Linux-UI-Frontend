@@ -2,23 +2,23 @@ using System.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ConfiguraÁ„o do HttpClient para acessar a API
+// Configura√ß√£o do HttpClient para acessar a API
 builder.Services.AddHttpClient("APIClient", client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7049/api/"); // URL base da sua API
+    client.BaseAddress = new Uri("http://191.235.238.91:5286/api/"); // URL base da sua API
     client.DefaultRequestHeaders.Accept.Clear();
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 });
 
-// Registrar os repositÛrios e associar ‡s suas interfaces
+// Registrar os reposit√≥rios e associar √†s suas interfaces
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IVeiculoCombustaoRepository, VeiculoCombustaoRepository>();
 builder.Services.AddScoped<IVeiculoEletricoRepository, VeiculoEletricoRepository>();
 
-// ConfiguraÁ„o para usar Controllers e Views
+// Configura√ß√£o para usar Controllers e Views
 builder.Services.AddControllersWithViews();
 
-// Adicionar suporte a sess„o
+// Adicionar suporte a sess√£o
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -28,7 +28,7 @@ builder.Services.AddSession(options =>
 
 var app = builder.Build();
 
-// ConfiguraÁ„o do pipeline de requisiÁ„o HTTP.
+// Configura√ß√£o do pipeline de requisi√ß√£o HTTP.
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -39,10 +39,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// Adicionar suporte a sess„o
+// Adicionar suporte a sess√£o
 app.UseSession();
 
-// ConfiguraÁ„o das rotas
+// Configura√ß√£o das rotas
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Login}/{action=Index}/{id?}");
